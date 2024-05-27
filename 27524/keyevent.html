@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+    <html lang="id">
+        
+   <!-bodyMenentukan konten utama dari sebuah halaman web, seperti teks, gambar, audio, video, dan elemen lainnya.  -->     
+    <body>
+   
+   <!--h1memberi tahu Google tentang konten halaman tersebut, apa yang ada di dalamnya -->
+    <h1>HTML DOM event</h1>
+    
+   <!--h2menyoroti bagian dan sub-bagian yang terpenting dari sebuah konten.   -->
+    <h2>The onkeydown Event</h2>
+    
+    <!--p:elemen paragraf.   -->  
+    <p>
+        ketika ditekan dan tahan kebawah background inputan akan berubah warna menjadi merah
+        , ketika melepasnya akan berubah ke hijau
+        , ketika cuma ditahan akan berubah warna menjadi kuning
+        
+    <!--p:elemen paragraf-->   
+    </p>
+    
+    <!--labelmenspesifikasikan atau memberi label pada sebuah element input-->
+    <label for="demo">ini label</label>
+    
+    <!--inputmembuat pengunjung bisa memasukkan data, seperti teks, angka, atau bahkan file-->
+    
+    <!--Atribut onkeydown diaktifkan ketika pengguna menekan tombol (pada keyboard)-->
+     <!--Atribut onkeyup diaktifkan ketika pengguna melepaskan tombol (pada keyboard)-->
+      <!--menyala ketika pengguna menekan tombol (pada keyboard)-->
+        <input type="text" id="demo"     
+    onkeydown="keydown()"        
+    onkeyup="keyup()"
+    onkeypress="keypress()">
+
+    <!--scriptmenambahkan kode JavaScript atau skrip lainnya ke halaman web-->
+<script>
+    function keydown() {
+        document.getElementById("demo").style.backgroundColor = "red";
+    }
+
+    function keyup() {
+        document.getElementById("demo").style.backgroundColor = "green" ;
+    }
+
+    function keypress() {
+        document.getElementById("demo").style.backgroundColor ="yellow";
+    }
+</script>
+
+    </body>
+    </html>
