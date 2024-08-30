@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Pendaftaran</title>
+    <style> 
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            background-image: url("https://lookw.net/19/1915/thumbs/1638926208-1031-www.lookw.net.jpg");
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background: #14ebff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        fieldset {
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        legend {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .input-group > div {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], input[type="date"], input[type="password"], input[type="email"], input[type="tel"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 16px;
+            box-sizing: border-box;
+        }
+
+        input[type="checkbox"], input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button {
+            background-color:#89a9cc;
+            color:#2d5e75;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #34ebc0;
+        }
+       
+        button:active{
+            background-color: black;
+        }
+        .warning {
+            color: red;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 10px;
+                box-shadow: none;
+            }
+
+            button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form id="registration-form">
+            <fieldset>
+                <legend>Informasi Pribadi</legend>
+                <div class="input-group">
+                    <div>
+                        <label for="name">Nama:</label>
+                        <input type="text" id="name" name="name" required aria-required="true">
+                    </div>
+                    <div>
+                        <label for="dob">Tanggal Lahir:</label>
+                        <input max="2024-08-30"type="date" id="dob" name="dob" required aria-requried="true">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div>
+                        <label for="age">Umur:</label>
+                        <input type="text" id="age" name="age" readonly>
+                    </div>
+                    <div>
+                        <label for="password">Kata Sandi:</label>
+                        <input type="password" id="password" name="password" required aria-required="true" minlength="6" placeholder="Minimal 6 karakter">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required aria-required="true">
+                    </div>
+                    <div>
+                        <label for="phone">Nomor HP:</label>
+                        <input type="tel" id="phone" name="phone" required aria-required="true" placeholder="Nomor HP" maxlength="13">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div>
+                        <label for="religion">Agama:</label>
+                        <select id="religion" name="religion" required aria-required="true">
+                            <option value="" disabled selected>Pilih Agama</option>
+                            <option value="islam">Islam</option>
+                            <option value="kristen">Kristen</option>
+                            <option value="katolik">Katolik</option>
+                            <option value="hindu">Hindu</option>
+                            <option value="budha">Budha</option>
+                            <option value="konghucu">Konghucu</option>
+                            <option value="lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label>Jenis Kelamin:</label>
+                    <label><input type="radio" name="gender" value="pria" required> Pria</label>
+                    <label><input type="radio" name="gender" value="perempuan"> Perempuan</label>
+                </div>
+                <div>
+                    <label>Minat (pilih maksimal 3):</label>
+                    <label><input type="checkbox" name="interests" value="sports"> Olahraga</label>
+                    <label><input type="checkbox" name="interests" value="reading"> Membaca</label>
+                    <label><input type="checkbox" name="interests" value="traveling"> Bepergian</label>
+                    <label><input type="checkbox" name="interests" value="cooking"> Memasak</label>
+                    <label><input type="checkbox" name="interests" value="music"> Musik</label>
+                </div>
+                <div>
+                    <button type="submit">Kirim</button>
+                </div>
+                <div id="warning" class="warning"></div>
+            </fieldset>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('registration-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah pengiriman formulir
+
+            // Mengambil nilai input
+            const name = document.getElementById('name').value;
+            const dob = document.getElementById('dob').value;
+            const age = document.getElementById('age').value;
+            const password = document.getElementById('password').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const religion = document.getElementById('religion').value;
+
+            // Mengambil nilai radio button (jenis kelamin)
+            const gender = document.querySelector('input[name="gender"]:checked')?.value || 'Tidak Dipilih';
+
+            // Mengambil nilai checkbox (maksimal 3 pilihan)
+            const selectedInterests = Array.from(document.querySelectorAll('input[name="interests"]:checked'));
+            if (selectedInterests.length > 3) {
+                document.getElementById('warning').textContent = 'Anda hanya dapat memilih maksimal 3 minat.';
+                return; // Tidak melanjutkan proses jika lebih dari 3 minat
+            }
+            const interests = selectedInterests.map(checkbox => checkbox.nextSibling.textContent.trim()).join(', ') || 'Tidak Ada';
+
+            // Membuat pesan hasil
+            const resultMessage = `
+                <h2>Data Pendaftaran</h2>
+                <p><strong>Nama:</strong> ${name}</p>
+                <p><strong>Tanggal Lahir:</strong> ${dob}</p>
+                <p><strong>Umur:</strong> ${age}</p>
+                <p><strong>Kata Sandi:</strong> ${password}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Nomor HP:</strong> ${phone}</p>
+                <p><strong>Agama:</strong> ${religion}</p>
+                <p><strong>Jenis Kelamin:</strong> ${gender}</p>
+                <p><strong>Minat:</strong> ${interests}</p>
+            `;
+
+            // Menampilkan hasil
+            document.getElementById('result').innerHTML = resultMessage;
+            document.getElementById('warning').textContent = ''; // Hapus pesan peringatan jika valid
+        });
+
+        document.getElementById('dob').addEventListener('change', function() {
+            const dob = new Date(this.value);
+            const today = new Date();
+            let age = today.getFullYear() - dob.getFullYear();
+            const monthDiff = today.getMonth() - dob.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+            document.getElementById('age').value = age;
+        });
+    </script>
+</body>
+</html>
